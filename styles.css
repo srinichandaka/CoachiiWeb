@@ -484,12 +484,53 @@ img, svg { display: block; }
   box-shadow: var(--shadow-sm);
 }
 
-/* ── iOS-style app mockup ──────────────────── */
+/* ── Real app screenshot stack ──────────────────── */
 .hero-visual {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
+.screenshot-stack {
+  position: relative;
+  width: 320px;
+  height: 520px;
+  flex-shrink: 0;
+}
+
+.screenshot-frame {
+  position: absolute;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.screenshot-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Map view: offset right and down, slight rotation, lower z */
+.screenshot-frame-back {
+  width: 230px;
+  top: 48px;
+  right: 0;
+  z-index: 1;
+  transform: rotate(4deg);
+  opacity: 0.9;
+}
+
+/* List view: primary, sits left and in front */
+.screenshot-frame-front {
+  width: 245px;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* Legacy CSS mockup — kept for reference but no longer used in HTML */
 .app-mockup {
   background: #f2f2f7;
   border-radius: 42px;
@@ -1371,16 +1412,14 @@ summary + p {
     display: flex;
     justify-content: center;
   }
-  .hero-visual .app-mockup {
-    max-width: 260px;
+
+  .screenshot-stack {
+    width: 220px;
+    height: 400px;
   }
-  /* Clip the cards list so the mockup stays a compact height */
-  .hero-visual .mockup-cards-list {
-    max-height: 240px;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-  }
+
+  .screenshot-frame-front { width: 200px; }
+  .screenshot-frame-back  { width: 185px; top: 30px; }
 
   .pitch-circle,
   .pitch-line-h,
