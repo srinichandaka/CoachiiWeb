@@ -1,3 +1,6 @@
+/* Prevent page CSS from overriding the HTML hidden attribute */
+[hidden] { display: none !important; }
+
 /* ═══════════════════════════════════════
    FINDER HERO
 ════════════════════════════════════════ */
