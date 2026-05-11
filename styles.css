@@ -493,16 +493,17 @@ img, svg { display: block; }
 
 .screenshot-stack {
   position: relative;
-  width: 320px;
+  /* wide enough for both screenshots with minimal overlap */
+  width: 420px;
   height: 520px;
   flex-shrink: 0;
 }
 
 .screenshot-frame {
   position: absolute;
-  border-radius: 36px;
+  border-radius: 40px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.08);
 }
 
@@ -512,19 +513,19 @@ img, svg { display: block; }
   height: auto;
 }
 
-/* Map view: offset right and down, slight rotation, lower z */
+/* Map view: anchored to right, offset down, slight tilt */
 .screenshot-frame-back {
   width: 230px;
-  top: 48px;
+  top: 50px;
   right: 0;
   z-index: 1;
-  transform: rotate(4deg);
-  opacity: 0.9;
+  transform: rotate(3deg);
+  opacity: 0.95;
 }
 
-/* List view: primary, sits left and in front */
+/* List view: anchored to left, sits fully in front */
 .screenshot-frame-front {
-  width: 245px;
+  width: 240px;
   top: 0;
   left: 0;
   z-index: 2;
@@ -1414,12 +1415,12 @@ summary + p {
   }
 
   .screenshot-stack {
-    width: 220px;
-    height: 400px;
+    width: 310px;
+    height: 420px;
   }
 
-  .screenshot-frame-front { width: 200px; }
-  .screenshot-frame-back  { width: 185px; top: 30px; }
+  .screenshot-frame-front { width: 185px; left: 0; }
+  .screenshot-frame-back  { width: 175px; top: 36px; right: 0; }
 
   .pitch-circle,
   .pitch-line-h,
