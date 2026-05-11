@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Find a Sports Coach Near You | Coachii</title>
+    <meta name="description" content="Search trusted local sports coaches by sport and location. Browse coach profiles, qualifications and reviews — then download the Coachii app to get in touch." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1a7a3c" />
+
+    <meta property="og:title" content="Find a Sports Coach Near You | Coachii" />
+    <meta property="og:description" content="Browse verified local sports coaches across the UK. Filter by sport and location." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://coachii.app/coaches" />
+    <meta property="og:locale" content="en_GB" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="finder.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="/" aria-label="Coachii home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-text">Coachii</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav">
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav id="primary-nav" aria-label="Primary navigation">
+          <ul class="nav-list">
+            <li><a href="/#coaches">For Coaches</a></li>
+            <li><a href="/#parents">For Parents</a></li>
+            <li><a href="/coaches.html" aria-current="page">Find a Coach</a></li>
+            <li><a href="/#faq">FAQ</a></li>
+          </ul>
+          <a href="#app-banner" class="btn btn-primary btn-sm nav-cta">Download App</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+
+      <!-- PAGE HERO -->
+      <section class="finder-hero section" aria-labelledby="finder-heading">
+        <div class="container">
+          <p class="section-eyebrow">Free to browse · No sign-up required</p>
+          <h1 id="finder-heading">Find a local sports coach</h1>
+          <p class="finder-hero-sub">Browse verified coaches near you. Filter by sport or location, then download the app to get in touch.</p>
+
+          <!-- SEARCH / FILTER BAR -->
+          <div class="finder-bar" role="search" aria-label="Coach search filters">
+            <div class="finder-field">
+              <label for="filter-location" class="finder-label">Town or postcode</label>
+              <div class="finder-input-wrap">
+                <svg class="finder-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 1.5A4.5 4.5 0 0 1 12.5 6c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <input id="filter-location" class="finder-input" type="text" placeholder="e.g. Manchester or M1 1AE" autocomplete="off" />
+              </div>
+            </div>
+
+            <div class="finder-field">
+              <label for="filter-sport" class="finder-label">Sport</label>
+              <div class="finder-input-wrap">
+                <svg class="finder-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M4 8h8M8 4v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <select id="filter-sport" class="finder-input finder-select">
+                  <option value="">All sports</option>
+                  <option>Football</option>
+                  <option>Tennis</option>
+                  <option>Basketball</option>
+                  <option>Rugby</option>
+                  <option>Cricket</option>
+                  <option>Swimming</option>
+                  <option>Athletics</option>
+                  <option>Badminton</option>
+                  <option>Cycling</option>
+                  <option>Golf</option>
+                  <option>Gymnastics</option>
+                  <option>Hockey</option>
+                  <option>Martial Arts</option>
+                  <option>Netball</option>
+                  <option>Squash</option>
+                  <option>Table Tennis</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="btn-search" class="btn btn-primary finder-search-btn" aria-label="Search coaches">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="6.5" cy="6.5" r="5" stroke="white" stroke-width="1.8"/>
+                <path d="M10.5 10.5L14 14" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              Search
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTS -->
+      <section class="section finder-results-section" aria-labelledby="results-heading">
+        <div class="container">
+          <div class="finder-results-header">
+            <h2 id="results-heading" class="finder-results-title">
+              <span id="results-count"></span>
+            </h2>
+          </div>
+
+          <!-- Loading skeleton -->
+          <div id="coaches-loading" class="coach-grid" aria-label="Loading coaches" aria-live="polite">
+            <div class="coach-card coach-card--skeleton" aria-hidden="true">
+              <div class="skel skel-avatar"></div>
+              <div class="skel skel-line skel-name"></div>
+              <div class="skel skel-line skel-short"></div>
+              <div class="skel skel-line skel-med"></div>
+            </div>
+            <div class="coach-card coach-card--skeleton" aria-hidden="true">
+              <div class="skel skel-avatar"></div>
+              <div class="skel skel-line skel-name"></div>
+              <div class="skel skel-line skel-short"></div>
+              <div class="skel skel-line skel-med"></div>
+            </div>
+            <div class="coach-card coach-card--skeleton" aria-hidden="true">
+              <div class="skel skel-avatar"></div>
+              <div class="skel skel-line skel-name"></div>
+              <div class="skel skel-line skel-short"></div>
+              <div class="skel skel-line skel-med"></div>
+            </div>
+          </div>
+
+          <!-- Results grid (populated by JS) -->
+          <div id="coaches-grid" class="coach-grid" aria-live="polite" aria-label="Coach results" hidden></div>
+
+          <!-- Empty state -->
+          <div id="coaches-empty" class="finder-empty" hidden>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <circle cx="24" cy="24" r="22" stroke="#c8ddd1" stroke-width="2"/>
+              <path d="M16 28s2-4 8-4 8 4 8 4" stroke="#7a9888" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="18" cy="20" r="2" fill="#7a9888"/>
+              <circle cx="30" cy="20" r="2" fill="#7a9888"/>
+            </svg>
+            <p class="finder-empty-title">No coaches found</p>
+            <p class="finder-empty-sub">Try a different sport or location, or <a href="/">download the app</a> to see all coaches.</p>
+          </div>
+
+          <!-- Error state -->
+          <div id="coaches-error" class="finder-error" hidden>
+            <p>Could not load coaches. Please try again.</p>
+            <button id="btn-retry" class="btn btn-secondary btn-sm">Retry</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- APP DOWNLOAD BANNER -->
+      <section id="app-banner" class="section final-cta-section" aria-labelledby="banner-heading">
+        <div class="container">
+          <div class="final-cta-card">
+            <div class="final-deco" aria-hidden="true">
+              <div class="final-deco-circle"></div>
+              <div class="final-deco-arc"></div>
+            </div>
+            <div class="final-cta-content">
+              <p class="eyebrow eyebrow-light">Free iOS app</p>
+              <h2 id="banner-heading">Ready to connect with a coach?</h2>
+              <p>Download the Coachii app to message coaches directly, book sessions and track your progress.</p>
+              <div class="cta-row final-cta-row">
+                <a href="https://apps.apple.com/gb/app/coachii/id6743618148" class="btn btn-appstore btn-appstore-light" target="_blank" rel="noopener noreferrer" aria-label="Download Coachii on the App Store">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                  <span><small>Download on the</small><strong>App Store</strong></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <a class="brand" href="/" aria-label="Coachii home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="brand-text">Coachii</span>
+          </a>
+          <p class="footer-desc">Find trusted local sports coaches near you. Free for coaches, parents and players across the UK.</p>
+          <p class="footer-made">Made for UK grassroots sport</p>
+        </div>
+        <div class="footer-links">
+          <nav aria-label="Site navigation">
+            <ul class="footer-nav">
+              <li><a href="/#coaches">For Coaches</a></li>
+              <li><a href="/#parents">For Parents</a></li>
+              <li><a href="/coaches.html">Find a Coach</a></li>
+              <li><a href="/#faq">FAQ</a></li>
+            </ul>
+          </nav>
+          <nav aria-label="Legal">
+            <ul class="footer-nav footer-legal">
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#terms">Terms</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>© <span id="year"></span> Coachii. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Supabase JS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="supabase-config.js"></script>
+    <script>
+      // ── Supabase client ─────────────────────────────────────
+      const { createClient } = supabase;
+      const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // ── DOM refs ────────────────────────────────────────────
+      const gridEl      = document.getElementById('coaches-grid');
+      const loadingEl   = document.getElementById('coaches-loading');
+      const emptyEl     = document.getElementById('coaches-empty');
+      const errorEl     = document.getElementById('coaches-error');
+      const countEl     = document.getElementById('results-count');
+      const inputLoc    = document.getElementById('filter-location');
+      const inputSport  = document.getElementById('filter-sport');
+      const btnSearch   = document.getElementById('btn-search');
+      const btnRetry    = document.getElementById('btn-retry');
+
+      // ── Helpers ─────────────────────────────────────────────
+      function feeLabel(rate) {
+        if (rate === null || rate === undefined) return 'Contact for pricing';
+        if (rate === 0) return 'Free';
+        return `£${Number(rate).toFixed(0)}/hr`;
+      }
+
+      function starHTML(avg, count) {
+        if (!count) return '';
+        const filled = Math.round(avg);
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+          stars += `<span class="star${i <= filled ? ' star--on' : ''}" aria-hidden="true">★</span>`;
+        }
+        return `<span class="coach-rating" aria-label="${avg.toFixed(1)} stars from ${count} review${count !== 1 ? 's' : ''}">${stars}<span class="rating-count">${count}</span></span>`;
+      }
+
+      function avatarURL(userId, photoPath) {
+        if (!photoPath) return null;
+        if (photoPath.startsWith('http')) return photoPath;
+        return STORAGE_BASE + photoPath;
+      }
+
+      function avatarHTML(coach) {
+        const url = avatarURL(coach.user_id, coach.photo_url);
+        const initials = `${(coach.first_name || '')[0] || ''}${(coach.last_name || '')[0] || ''}`.toUpperCase();
+        if (url) {
+          return `<img class="coach-avatar" src="${url}" alt="${coach.first_name} ${coach.last_name}" loading="lazy" onerror="this.replaceWith(document.getElementById('avatar-fallback-tmpl').content.cloneNode(true).firstElementChild); this.nextSibling && this.nextSibling.remove();" />`;
+        }
+        return `<div class="coach-avatar coach-avatar--initials" aria-hidden="true">${initials || '?'}</div>`;
+      }
+
+      function sportsArray(coach) {
+        // Handle both array column (sports) and single-value (sport)
+        if (Array.isArray(coach.sports)) return coach.sports;
+        if (coach.sport) return [coach.sport];
+        return [];
+      }
+
+      function renderCard(coach) {
+        const name    = `${coach.first_name || ''} ${coach.last_name || ''}`.trim() || 'Unknown Coach';
+        const sports  = sportsArray(coach);
+        const fee     = feeLabel(coach.hourly_rate);
+        const loc     = [coach.location, coach.postcode].filter(Boolean).join(' · ');
+        const dbs     = coach.dbs_verified;
+        const avg     = coach.avg_rating;
+        const cnt     = coach.review_count;
+
+        return `
+          <article class="coach-card">
+            <a href="coach.html?id=${coach.id}" class="coach-card-link" aria-label="View ${name}'s profile">
+              <div class="coach-card-top">
+                ${avatarHTML(coach)}
+                ${dbs ? '<span class="dbs-badge" title="DBS checked">✓ DBS</span>' : ''}
+              </div>
+              <div class="coach-card-body">
+                <h3 class="coach-name">${name}</h3>
+                ${avg ? starHTML(avg, cnt) : ''}
+                ${sports.length ? `<p class="coach-sports">${sports.slice(0,3).join(' · ')}</p>` : ''}
+                ${loc ? `<p class="coach-location">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5A4.5 4.5 0 0 1 12.5 6c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                  ${loc}
+                </p>` : ''}
+                <span class="coach-fee">${fee}</span>
+              </div>
+            </a>
+          </article>`;
+      }
+
+      function showState(state) {
+        loadingEl.hidden = state !== 'loading';
+        gridEl.hidden    = state !== 'results';
+        emptyEl.hidden   = state !== 'empty';
+        errorEl.hidden   = state !== 'error';
+      }
+
+      // ── Fetch ───────────────────────────────────────────────
+      async function fetchCoaches(location, sport) {
+        showState('loading');
+
+        // Build query — adjust column names to match your exact schema
+        let q = db
+          .from('coaches')
+          .select('id, user_id, first_name, last_name, sport, sports, location, postcode, hourly_rate, dbs_verified, photo_url, avg_rating, review_count')
+          .order('first_name', { ascending: true })
+          .limit(60);
+
+        if (location.trim()) {
+          const loc = location.trim();
+          q = q.or(`location.ilike.%${loc}%,postcode.ilike.%${loc}%`);
+        }
+
+        if (sport) {
+          // Try array contains first; if your sport column is a plain text column
+          // change this to: q = q.ilike('sport', `%${sport}%`)
+          q = q.or(`sports.cs.{${sport}},sport.ilike.%${sport}%`);
+        }
+
+        const { data, error } = await q;
+
+        if (error) {
+          console.error('Supabase error:', error);
+          showState('error');
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          countEl.textContent = '';
+          showState('empty');
+          return;
+        }
+
+        countEl.textContent = `${data.length} coach${data.length !== 1 ? 'es' : ''} found`;
+        gridEl.innerHTML = data.map(renderCard).join('');
+        showState('results');
+      }
+
+      // ── Events ──────────────────────────────────────────────
+      function doSearch() {
+        fetchCoaches(inputLoc.value, inputSport.value);
+      }
+
+      btnSearch.addEventListener('click', doSearch);
+      btnRetry.addEventListener('click', doSearch);
+
+      inputLoc.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+      inputSport.addEventListener('change', doSearch);
+
+      // ── Nav toggle ──────────────────────────────────────────
+      const toggle = document.querySelector('.nav-toggle');
+      const nav    = document.getElementById('primary-nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+          nav.classList.toggle('nav-open', !open);
+        });
+        document.querySelectorAll('#primary-nav a').forEach(link => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('nav-open');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // ── Initial load ─────────────────────────────────────────
+      fetchCoaches('', '');
+    </script>
+  </body>
+</html>
