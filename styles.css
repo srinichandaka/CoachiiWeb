@@ -701,6 +701,21 @@ img, svg { display: block; }
   color: #8e8e93;
 }
 
+.mockup-home-indicator {
+  background: #f2f2f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0 16px;
+}
+.mockup-home-indicator::after {
+  content: '';
+  width: 36px;
+  height: 5px;
+  background: #c7c7cc;
+  border-radius: 999px;
+}
+
 /* ═══════════════════════════════════════
    COACHES SECTION
 ════════════════════════════════════════ */
@@ -1338,10 +1353,38 @@ summary + p {
    HERO VISUAL RESPONSIVE
 ════════════════════════════════════════ */
 @media (max-width: 959px) {
-  .hero-visual { display: none; }
+  .hero {
+    overflow: visible;
+    padding-block: 2.5rem 2rem;
+  }
+
+  .hero-grid { gap: 1.5rem; }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .trust-chips { margin-top: 1rem; }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+  .hero-visual .app-mockup {
+    max-width: 260px;
+  }
+  /* Clip the cards list so the mockup stays a compact height */
+  .hero-visual .mockup-cards-list {
+    max-height: 240px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
   .pitch-circle,
   .pitch-line-h,
-  .pitch-arc   { opacity: 0.4; }
+  .pitch-arc   { opacity: 0; }
 }
 
 @media (min-width: 960px) {
