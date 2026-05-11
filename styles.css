@@ -484,153 +484,221 @@ img, svg { display: block; }
   box-shadow: var(--shadow-sm);
 }
 
-/* App mockup */
+/* ── iOS-style app mockup ──────────────────── */
 .hero-visual {
   display: flex;
   justify-content: center;
 }
 
 .app-mockup {
-  background: var(--surface);
-  border-radius: 28px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
+  background: #f2f2f7;
+  border-radius: 42px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.1), inset 0 0 0 1.5px rgba(0,0,0,0.1);
   width: 100%;
-  max-width: 320px;
+  max-width: 290px;
+  overflow: hidden;
+  font-family: -apple-system, "Manrope", sans-serif;
+}
+
+/* Status bar */
+.mockup-statusbar {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px 2px;
+}
+.sb-time {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: -0.02em;
+}
+.sb-island {
+  width: 26px;
+  height: 8px;
+  background: #000;
+  border-radius: 999px;
+}
+.sb-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #000;
+}
+.sb-battery {
+  width: 22px;
+  height: 11px;
+  border: 1.5px solid rgba(0,0,0,0.35);
+  border-radius: 2.5px;
+  padding: 1.5px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sb-battery::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5px;
+  height: 5px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 0 1px 1px 0;
+}
+.sb-battery-fill {
+  background: #000;
+  width: 72%;
+  height: 100%;
+  border-radius: 1px;
+}
+
+/* Nav title */
+.mockup-nav-title {
+  background: #fff;
+  padding: 6px 16px 10px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #000;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* Search bar + map toggle */
+.mockup-search-header {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 10px;
+}
+.mockup-searchbar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #e5e5ea;
+  border-radius: 10px;
+  padding: 7px 10px;
+  color: #8e8e93;
+  font-size: 0.76rem;
+}
+.mockup-map-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #8e8e93;
+  border: 1.5px solid #c7c7cc;
+  border-radius: 999px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Sport filter chips */
+.mockup-sport-row {
+  background: #fff;
+  display: flex;
+  gap: 6px;
+  padding: 0 12px 12px;
+  overflow: hidden;
+}
+.ios-sport-chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #3c3c43;
+  background: #e5e5ea;
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ios-sport-chip-active {
+  background: var(--green);
+  color: #fff;
+}
+
+/* Cards list */
+.mockup-cards-list {
+  padding: 10px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f2f2f7;
   overflow: hidden;
 }
 
-.mockup-bar {
-  background: var(--green);
-  height: 48px;
+/* iOS Coach Card */
+.ios-coach-card {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 10px 10px 10px;
+  background: #fff;
+  border-radius: 12px;
 }
-
-.mockup-notch {
-  width: 72px;
-  height: 6px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 999px;
-}
-
-.mockup-body {
-  padding: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.mockup-section-label {
-  font-family: "Sora", sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--text);
-}
-
-.mockup-search-row {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.mockup-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  background: var(--green-xlight);
-  border: 1px solid var(--border);
-  color: var(--green-dark);
-  padding: 0.28rem 0.6rem;
-  border-radius: 999px;
-}
-
-.chip-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  flex-shrink: 0;
-}
-.chip-dot-location { background: #e85555; }
-.chip-dot-sport    { background: var(--green); }
-
-.mockup-results-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--muted-light);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.mockup-coach-card {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.65rem 0.75rem;
-  background: var(--green-xlight);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-sm);
-}
-
-.mockup-coach-card-dim {
+.ios-coach-card-peek {
   opacity: 0.55;
 }
-
-.mc-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  font-size: 0.7rem;
-  font-weight: 800;
-  color: #fff;
+.ios-avatar-svg {
   flex-shrink: 0;
 }
-.mc-avatar-green { background: var(--green); }
-.mc-avatar-teal  { background: #0e7a6e; }
-.mc-avatar-olive { background: #5a7a3c; }
-
-.mc-info {
+.ios-card-body {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
-.mc-name   { font-size: 0.82rem; font-weight: 700; color: var(--text); }
-.mc-detail { font-size: 0.72rem; color: var(--muted); }
-
-.mc-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--green-dark);
-  background: rgba(26, 122, 60, 0.12);
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
-  align-self: flex-start;
-}
-
-.mc-stars {
-  font-size: 0.7rem;
-  color: #f0a500;
-  flex-shrink: 0;
-  letter-spacing: -0.05em;
-}
-.mc-stars-dim { color: #ccc; }
-
-.mockup-cta-btn {
-  text-align: center;
-  background: var(--green);
-  color: #fff;
+.ios-card-name {
   font-size: 0.82rem;
   font-weight: 700;
-  padding: 0.6rem;
-  border-radius: 10px;
-  margin-top: 0.2rem;
+  color: #000;
+  line-height: 1.2;
+}
+.ios-fee-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: #3c3c43;
+  border: 1.5px solid #c7c7cc;
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin: 1px 0;
+  align-self: flex-start;
+}
+.ios-card-sport {
+  font-size: 0.72rem;
+  color: #3c3c43;
+  margin-top: 1px;
+}
+.ios-card-location {
+  font-size: 0.67rem;
+  color: #8e8e93;
+}
+.ios-card-trust {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  flex-wrap: wrap;
+}
+.ios-dbs {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.63rem;
+  font-weight: 600;
+  color: #1c9e43;
+}
+.ios-fa-badge {
+  font-size: 0.63rem;
+  color: #8e8e93;
 }
 
 /* ═══════════════════════════════════════
