@@ -493,10 +493,10 @@ img, svg { display: block; }
 
 .screenshot-stack {
   position: relative;
-  /* wide enough for both screenshots with minimal overlap */
   width: 420px;
   height: 520px;
   flex-shrink: 0;
+  overflow: hidden; /* clip anything that bleeds out of the stack */
 }
 
 .screenshot-frame {
@@ -513,19 +513,22 @@ img, svg { display: block; }
   height: auto;
 }
 
-/* Map view: anchored to right, offset down, slight tilt */
+/* Map view: right-anchored, offset down, slight tilt */
 .screenshot-frame-back {
   width: 230px;
-  top: 50px;
+  height: 498px; /* 230/390 * 844 — keeps the aspect ratio */
+  top: 28px;
   right: 0;
   z-index: 1;
   transform: rotate(3deg);
+  transform-origin: top right;
   opacity: 0.95;
 }
 
-/* List view: anchored to left, sits fully in front */
+/* List view: left-anchored, sits in front */
 .screenshot-frame-front {
   width: 240px;
+  height: 519px; /* 240/390 * 844 */
   top: 0;
   left: 0;
   z-index: 2;
@@ -1414,19 +1417,25 @@ summary + p {
     justify-content: center;
   }
 
-  /* On mobile show only the list view — no room for two screenshots */
   .screenshot-stack {
-    width: 240px;
-    height: 440px;
+    width: 280px;
+    height: 390px;
   }
 
   .screenshot-frame-front {
-    width: 240px;
+    width: 180px;
+    height: 390px;
     left: 0;
     top: 0;
   }
 
-  .screenshot-frame-back { display: none; }
+  .screenshot-frame-back {
+    display: block;
+    width: 170px;
+    height: 368px;
+    top: 24px;
+    right: 0;
+  }
 
   .pitch-circle,
   .pitch-line-h,
