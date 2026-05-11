@@ -122,8 +122,19 @@
             </h2>
           </div>
 
+          <!-- Idle state (no search yet) -->
+          <div id="coaches-idle" class="finder-idle">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <circle cx="24" cy="24" r="22" stroke="#c8ddd1" stroke-width="2"/>
+              <path d="M24 13.5A7.5 7.5 0 0 1 31.5 21c0 5-7.5 14-7.5 14S16.5 26 16.5 21A7.5 7.5 0 0 1 24 13.5Z" stroke="#7a9888" stroke-width="1.8" stroke-linejoin="round"/>
+              <circle cx="24" cy="21" r="2.5" stroke="#7a9888" stroke-width="1.8"/>
+            </svg>
+            <p class="finder-idle-title">Enter a town or postcode to find coaches</p>
+            <p class="finder-idle-sub">Try "Manchester", "Leeds" or a postcode like "M1 1AE"</p>
+          </div>
+
           <!-- Loading skeleton -->
-          <div id="coaches-loading" class="coach-grid" aria-label="Loading coaches" aria-live="polite">
+          <div id="coaches-loading" class="coach-grid" aria-label="Loading coaches" aria-live="polite" hidden>
             <div class="coach-card coach-card--skeleton" aria-hidden="true">
               <div class="skel skel-avatar"></div>
               <div class="skel skel-line skel-name"></div>
@@ -146,6 +157,15 @@
 
           <!-- Results grid (populated by JS) -->
           <div id="coaches-grid" class="coach-grid" aria-live="polite" aria-label="Coach results" hidden></div>
+
+          <!-- See more nudge (shown when 5 results returned) -->
+          <div id="coaches-more" class="coaches-more-nudge" hidden>
+            <p class="coaches-more-text">There are more coaches in this area — download the app to see them all.</p>
+            <a href="https://apps.apple.com/gb/app/coachii/id6743618148" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              See all coaches on the App Store
+            </a>
+          </div>
 
           <!-- Empty state -->
           <div id="coaches-empty" class="finder-empty" hidden>
@@ -241,6 +261,7 @@
       const loadingEl   = document.getElementById('coaches-loading');
       const emptyEl     = document.getElementById('coaches-empty');
       const errorEl     = document.getElementById('coaches-error');
+      const idleEl      = document.getElementById('coaches-idle');
       const countEl     = document.getElementById('results-count');
       const inputLoc    = document.getElementById('filter-location');
       const inputSport  = document.getElementById('filter-sport');
@@ -296,7 +317,7 @@
 
         return `
           <article class="coach-card">
-            <a href="coach.html?id=${coach.id}" class="coach-card-link" aria-label="View ${name}'s profile">
+            <div class="coach-card-link">
               <div class="coach-card-top">
                 ${avatarHTML(coach)}
                 ${dbs ? '<span class="dbs-badge" title="DBS checked">✓ DBS</span>' : ''}
@@ -311,11 +332,12 @@
                 </p>` : ''}
                 <span class="coach-fee">${fee}</span>
               </div>
-            </a>
+            </div>
           </article>`;
       }
 
       function showState(state) {
+        idleEl.hidden    = state !== 'idle';
         loadingEl.hidden = state !== 'loading';
         gridEl.hidden    = state !== 'results';
         emptyEl.hidden   = state !== 'empty';
@@ -331,7 +353,7 @@
           .from('coaches')
           .select('id, user_id, first_name, last_name, sport, location, postcode, hourly_fee, dbs_verified, photo_url')
           .order('first_name', { ascending: true })
-          .limit(60);
+          .limit(5);
 
         if (location.trim()) {
           const loc = location.trim();
@@ -356,13 +378,21 @@
           return;
         }
 
-        countEl.textContent = `${data.length} coach${data.length !== 1 ? 'es' : ''} found`;
+        countEl.textContent = `${data.length} coach${data.length !== 1 ? 'es' : ''} found near you`;
         gridEl.innerHTML = data.map(renderCard).join('');
+        document.getElementById('coaches-more').hidden = data.length < 5;
         showState('results');
       }
 
       // ── Events ──────────────────────────────────────────────
       function doSearch() {
+        if (!inputLoc.value.trim()) {
+          inputLoc.classList.add('finder-input--error');
+          inputLoc.classList.add('finder-input--shake');
+          inputLoc.addEventListener('animationend', () => inputLoc.classList.remove('finder-input--shake'), { once: true });
+          return;
+        }
+        inputLoc.classList.remove('finder-input--error');
         fetchCoaches(inputLoc.value, inputSport.value);
       }
 
@@ -370,7 +400,8 @@
       btnRetry.addEventListener('click', doSearch);
 
       inputLoc.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
-      inputSport.addEventListener('change', doSearch);
+      inputLoc.addEventListener('input', () => inputLoc.classList.remove('finder-input--error'));
+      inputSport.addEventListener('change', () => { if (inputLoc.value.trim()) doSearch(); });
 
       // ── Nav toggle ──────────────────────────────────────────
       const toggle = document.querySelector('.nav-toggle');
@@ -391,8 +422,8 @@
 
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // ── Initial load ─────────────────────────────────────────
-      fetchCoaches('', '');
+      // ── Initial state ─────────────────────────────────────────
+      showState('idle');
     </script>
   </body>
 </html>

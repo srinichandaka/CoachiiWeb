@@ -137,8 +137,8 @@
 }
 
 .coach-card:hover {
-  box-shadow: var(--shadow);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  transform: none;
 }
 
 .coach-card-link {
@@ -146,6 +146,7 @@
   text-decoration: none;
   color: inherit;
   padding: 1.25rem;
+  cursor: default;
 }
 
 .coach-card-top {
@@ -266,6 +267,68 @@
 .skel-name    { width: 70%; }
 .skel-short   { width: 40%; }
 .skel-med     { width: 55%; }
+
+/* ── Input error state ──────────────── */
+.finder-input--error {
+  border-color: #e53e3e !important;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.12) !important;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.finder-input--shake {
+  animation: shake 0.35s ease;
+}
+
+/* ── Idle state ─────────────────────── */
+.finder-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding-block: 3rem;
+  text-align: center;
+}
+
+.finder-idle-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  margin: 0;
+}
+
+.finder-idle-sub {
+  font-size: 0.9rem;
+  color: var(--muted-light);
+  margin: 0;
+}
+
+/* ── See more nudge ─────────────────── */
+.coaches-more-nudge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--green-xlight);
+  border: 1px solid rgba(26, 122, 60, 0.18);
+  border-radius: var(--radius);
+}
+
+.coaches-more-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin: 0;
+}
 
 /* ── Empty / error states ───────────── */
 .finder-empty {
