@@ -280,8 +280,7 @@
       }
 
       function sportsArray(coach) {
-        // Handle both array column (sports) and single-value (sport)
-        if (Array.isArray(coach.sports)) return coach.sports;
+        if (Array.isArray(coach.sport)) return coach.sport;
         if (coach.sport) return [coach.sport];
         return [];
       }
@@ -289,11 +288,11 @@
       function renderCard(coach) {
         const name    = `${coach.first_name || ''} ${coach.last_name || ''}`.trim() || 'Unknown Coach';
         const sports  = sportsArray(coach);
-        const fee     = feeLabel(coach.hourly_rate);
+        const fee     = feeLabel(coach.hourly_fee);
         const loc     = [coach.location, coach.postcode].filter(Boolean).join(' · ');
         const dbs     = coach.dbs_verified;
-        const avg     = coach.avg_rating;
-        const cnt     = coach.review_count;
+        const avg     = null;
+        const cnt     = null;
 
         return `
           <article class="coach-card">
@@ -330,7 +329,7 @@
         // Build query — adjust column names to match your exact schema
         let q = db
           .from('coaches')
-          .select('id, user_id, first_name, last_name, sport, sports, location, postcode, hourly_rate, dbs_verified, photo_url, avg_rating, review_count')
+          .select('id, user_id, first_name, last_name, sport, location, postcode, hourly_fee, dbs_verified, photo_url')
           .order('first_name', { ascending: true })
           .limit(60);
 
@@ -340,9 +339,7 @@
         }
 
         if (sport) {
-          // Try array contains first; if your sport column is a plain text column
-          // change this to: q = q.ilike('sport', `%${sport}%`)
-          q = q.or(`sports.cs.{${sport}},sport.ilike.%${sport}%`);
+          q = q.ilike('sport', `%${sport}%`);
         }
 
         const { data, error } = await q;

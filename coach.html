@@ -233,7 +233,7 @@
       }
 
       function sportsArray(coach) {
-        if (Array.isArray(coach.sports)) return coach.sports;
+        if (Array.isArray(coach.sport)) return coach.sport;
         if (coach.sport) return [coach.sport];
         return [];
       }
@@ -243,7 +243,7 @@
 
         const [coachRes, reviewsRes, badgesRes] = await Promise.all([
           db.from('coaches')
-            .select('id, user_id, first_name, last_name, sport, sports, location, postcode, bio, hourly_rate, dbs_verified, photo_url, avg_rating, review_count, age_groups')
+            .select('id, user_id, first_name, last_name, sport, location, postcode, bio, hourly_fee, dbs_verified, photo_url, age_groups')
             .eq('id', id)
             .single(),
           db.from('reviews')
@@ -298,14 +298,20 @@
         if (loc)           metaHTML += `<span class="profile-meta-sep" aria-hidden="true">·</span><span class="profile-meta-item"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5A4.5 4.5 0 0 1 12.5 6c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>${loc}</span>`;
         document.getElementById('profile-meta').innerHTML = metaHTML;
 
+        // ── Compute avg rating from reviews ────────────────
+        const reviewCount = reviews.length;
+        const avgRating   = reviewCount
+          ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+          : null;
+
         // ── Trust chips ────────────────────────────────────
         let chipsHTML = '';
         if (coach.dbs_verified) chipsHTML += `<span class="trust-chip trust-chip--dbs">✓ DBS Checked</span>`;
-        if (coach.avg_rating && coach.review_count >= 5 && coach.avg_rating >= 4.5) {
+        if (avgRating && reviewCount >= 5 && avgRating >= 4.5) {
           chipsHTML += `<span class="trust-chip trust-chip--top">★ Top Rated</span>`;
         }
-        if (coach.avg_rating && coach.review_count) {
-          chipsHTML += `<span class="trust-chip">${starHTML(coach.avg_rating, coach.review_count)}</span>`;
+        if (avgRating && reviewCount) {
+          chipsHTML += `<span class="trust-chip">${starHTML(avgRating, reviewCount)}</span>`;
         }
         document.getElementById('profile-chips').innerHTML = chipsHTML;
 
@@ -316,7 +322,7 @@
         }
 
         // ── Fee ────────────────────────────────────────────
-        const fee = feeLabel(coach.hourly_rate);
+        const fee = feeLabel(coach.hourly_fee);
         if (fee) {
           document.getElementById('profile-fee').textContent = fee;
           document.getElementById('profile-fee-block').hidden = false;
@@ -336,8 +342,8 @@
         // ── Reviews ────────────────────────────────────────
         if (reviews.length) {
           const summaryEl = document.getElementById('profile-reviews-summary');
-          if (coach.avg_rating) {
-            summaryEl.innerHTML = `<div class="reviews-avg">${starHTML(coach.avg_rating, coach.review_count)}</div>`;
+          if (avgRating) {
+            summaryEl.innerHTML = `<div class="reviews-avg">${starHTML(avgRating, reviewCount)}</div>`;
           }
           const listEl = document.getElementById('profile-reviews-list');
           listEl.innerHTML = reviews.map(r => {
