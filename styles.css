@@ -1414,13 +1414,19 @@ summary + p {
     justify-content: center;
   }
 
+  /* On mobile show only the list view — no room for two screenshots */
   .screenshot-stack {
-    width: 310px;
-    height: 420px;
+    width: 240px;
+    height: 440px;
   }
 
-  .screenshot-frame-front { width: 185px; left: 0; }
-  .screenshot-frame-back  { width: 175px; top: 36px; right: 0; }
+  .screenshot-frame-front {
+    width: 240px;
+    left: 0;
+    top: 0;
+  }
+
+  .screenshot-frame-back { display: none; }
 
   .pitch-circle,
   .pitch-line-h,
