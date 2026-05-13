@@ -1053,6 +1053,25 @@ img, svg { display: block; }
   font-style: italic;
 }
 
+.cities-wrap {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.cities-wrap h3 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.cities-list li {
+  font-weight: 500;
+  font-size: 0.8rem;
+  background: var(--surface);
+  color: var(--text-mid);
+  border: 1px solid var(--border);
+}
+
 /* ═══════════════════════════════════════
    FEATURES SECTION
 ════════════════════════════════════════ */
