@@ -186,6 +186,7 @@
           <!-- Error state -->
           <div id="coaches-error" class="finder-error" hidden>
             <p>Could not load coaches. Please try again.</p>
+            <p id="coaches-error-detail" style="font-size:0.75rem;color:#888;margin-top:0.25rem;word-break:break-all;"></p>
             <button id="btn-retry" class="btn btn-secondary btn-sm">Retry</button>
           </div>
         </div>
@@ -368,13 +369,15 @@
         }
 
         if (sport) {
-          q = q.ilike('sport', `%${sport}%`);
+          q = q.contains('sport', [sport]);
         }
 
         const { data, error } = await q;
 
         if (error) {
           console.error('Supabase error:', error);
+          document.getElementById('coaches-error-detail').textContent =
+            `${error.code ?? ''} ${error.message ?? JSON.stringify(error)}`.trim();
           showState('error');
           return;
         }
