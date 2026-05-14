@@ -1252,7 +1252,30 @@ summary + p {
   color: var(--green);
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  margin: 0;
+  margin: 0 0 1rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--border-soft);
+  color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.footer-social a:hover {
+  background: var(--green);
+  color: #fff;
 }
 
 .footer-links {
