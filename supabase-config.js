@@ -4,7 +4,7 @@
 //  Find it: Supabase dashboard → Project Settings → API
 // ─────────────────────────────────────────────────────────────
 const SUPABASE_URL      = 'https://spymytnhyzhckziudcwc.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_PbnrGh-COZVTaCNe0qb6fQ_YWuNmRye';
+const SUPABASE_ANON_KEY = 'sb_publishable_HU8hmvZh-4FiizPALeTYSw_Bygk2pKG';
 
 // Storage base URL for coach profile photos (coachii-photos bucket)
 const STORAGE_BASE = `${SUPABASE_URL}/storage/v1/object/public/coachii-photos/`;
